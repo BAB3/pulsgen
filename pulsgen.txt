@@ -1,0 +1,41 @@
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+
+
+entity main is
+  Port ( 
+         led1: inout std_logic;
+         clk: in std_logic;
+         a: inout std_logic
+          );
+end main;
+
+architecture Behavioral of main is
+signal count : integer:=0;
+signal clk2 : std_logic:='0';
+begin
+
+process (clk)
+    begin
+     if(clk'event and clk='1') then
+           count <=count+1;
+          
+               if(count = 1) then
+                   clk2 <= not clk2;
+                   count <=1;
+                   
+                end if;
+        end if;
+       
+       if (clk2'event and clk2='1') then
+           a <= not(a);
+           led1<=not(led1);
+           
+       end if;
+    
+end process;
+
+end Behavioral;
